@@ -1,6 +1,6 @@
 import React from 'react';
 
-type Page = 'population' | 'clinical' | 'operations' | 'admin';
+type Page = 'population' | 'clinical' | 'operations' | 'admin' | 'regional' | 'report';
 
 interface HeaderProps {
     activePage: Page;
@@ -12,7 +12,9 @@ const Header: React.FC<HeaderProps> = ({ activePage, setActivePage }) => {
         { id: 'population', label: 'Population Health' },
         { id: 'clinical', label: 'Clinical Insights' },
         { id: 'operations', label: 'Operations' },
+        { id: 'regional', label: 'Regional Analytics' },
         { id: 'admin', label: 'Admin' },
+        { id: 'report', label: 'Create Report' },
     ];
 
     const activeClass = "bg-brand-teal-600 text-white px-3 py-2 rounded-md text-sm font-medium shadow-sm";

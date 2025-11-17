@@ -197,3 +197,58 @@ export interface AdminAnalyticsData {
   revenueTrends: RevenueTrend[];
   patientJourney: PatientJourneyStats;
 }
+
+// --- Regional Analytics Data Types ---
+
+export interface CountryCaseData {
+  country: string;
+  code: string; // ISO 3166-1 alpha-2 code
+  cases: number;
+}
+
+export interface RegionalData {
+  totalInternationalCases: number;
+  topCountry: CountryCaseData;
+  casesByCountry: CountryCaseData[];
+}
+
+
+// --- Report Data Types ---
+
+export interface ReportData {
+  reportDate: string;
+  period: {
+    start: string;
+    end: string;
+  };
+  aiInsights: {
+    summary: string;
+    positiveTrends: string[];
+    areasForReview: string[];
+  };
+  keyMetrics: {
+    totalScreened: number;
+    totalScreenedChange: number; // percentage change vs prev month
+    revenue: number;
+    revenueChange: number;
+    pendingCases: number;
+    pendingCasesChange: number;
+    overallUptime: number;
+    overallUptimeChange: number;
+  };
+  population: {
+    demographics: DemographicData[];
+    prevalence: PrevalenceData[];
+  };
+  clinical: {
+    casesByFinding: CaseFinding[];
+    concordanceRate: number;
+  };
+  operations: {
+    equipment: EquipmentStatus[];
+    throughput: PatientThroughput[];
+  };
+  financials: {
+    revenueTrends: RevenueTrend[];
+  };
+}

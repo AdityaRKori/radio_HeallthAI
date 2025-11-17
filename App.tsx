@@ -4,8 +4,10 @@ import ClinicalInsightsDashboard from './components/ClinicalInsightsDashboard';
 import OperationsDashboard from './components/OperationsDashboard';
 import AdminDashboard from './components/AdminDashboard';
 import Header from './components/Header';
+import RegionalAnalyticsDashboard from './components/RegionalAnalyticsDashboard';
+import ReportDashboard from './components/ReportDashboard';
 
-type Page = 'population' | 'clinical' | 'operations' | 'admin';
+type Page = 'population' | 'clinical' | 'operations' | 'admin' | 'regional' | 'report';
 
 function App() {
   const [activePage, setActivePage] = useState<Page>('clinical');
@@ -20,6 +22,10 @@ function App() {
         return <OperationsDashboard />;
       case 'admin':
         return <AdminDashboard />;
+      case 'regional':
+        return <RegionalAnalyticsDashboard />;
+      case 'report':
+        return <ReportDashboard />;
       default:
         return <PopulationHealthDashboard />;
     }

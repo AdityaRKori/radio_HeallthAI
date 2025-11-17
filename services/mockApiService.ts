@@ -1,5 +1,5 @@
 
-import { PopulationData, Filters, ClinicalData, OperationalData, EquipmentStatus, StaffingLevel, TriageData, TriageCase, TriagePriority, TriageStatus, AdminAnalyticsData, TriagePriorityStats } from '../types';
+import { PopulationData, Filters, ClinicalData, OperationalData, EquipmentStatus, StaffingLevel, TriageData, TriageCase, TriagePriority, TriageStatus, AdminAnalyticsData, TriagePriorityStats, RegionalData, ReportData } from '../types';
 
 const generateMockPopulationData = (filters: Filters): PopulationData => {
   // A simple seed based on filters to make data appear dynamic
@@ -273,3 +273,104 @@ export const fetchAdminAnalyticsData = (): Promise<AdminAnalyticsData> => {
         }, 650);
     });
 }
+
+// --- Mock Service for Regional Analytics ---
+const generateMockRegionalData = (): RegionalData => {
+    const countries = [
+        { country: 'United States', code: 'US', cases: 8520 },
+        { country: 'Canada', code: 'CA', cases: 4780 },
+        { country: 'United Kingdom', code: 'GB', cases: 3120 },
+        { country: 'Germany', code: 'DE', cases: 2540 },
+        { country: 'Australia', code: 'AU', cases: 1980 },
+        { country: 'India', code: 'IN', cases: 1560 },
+        { country: 'Brazil', code: 'BR', cases: 1230 },
+        { country: 'France', code: 'FR', cases: 980 },
+    ];
+
+    const sortedCountries = countries.sort((a, b) => b.cases - a.cases);
+    const totalInternationalCases = sortedCountries.reduce((sum, c) => sum + c.cases, 0);
+
+    return {
+        totalInternationalCases,
+        topCountry: sortedCountries[0],
+        casesByCountry: sortedCountries,
+    };
+};
+
+export const fetchRegionalData = (): Promise<RegionalData> => {
+    console.log('Fetching regional data...');
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(generateMockRegionalData());
+        }, 600);
+    });
+};
+
+// --- Mock Service for Report ---
+const generateMockReportData = (): ReportData => {
+    const popData = generateMockPopulationData({ site: 'all', startDate: '2023-01-01', endDate: '2023-01-31' });
+    const clinData = generateMockClinicalData(false);
+    const opsData = generateMockOperationalData();
+    const adminData = generateMockAdminAnalyticsData();
+    const triageData = generateMockTriageData();
+
+    const today = new Date();
+    const lastMonth = new Date();
+    lastMonth.setDate(1);
+    lastMonth.setMonth(lastMonth.getMonth() -1);
+
+    return {
+        reportDate: today.toDateString(),
+        period: {
+            start: lastMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
+            end: new Date(today.getFullYear(), today.getMonth(), 0).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
+        },
+        aiInsights: {
+            summary: "This month showed a significant 5.2% increase in screening volume, driving a 4.8% rise in revenue. While operational uptime remains high at 99.4%, a notable increase in 'Lung Nodules' detections warrants a review of screening protocols. The pending triage queue has decreased by 3.1%, indicating improved efficiency.",
+            positiveTrends: [
+                "Revenue and screening volumes are trending upwards.",
+                "AI/Radiologist concordance rate is stable at a high 96.2%.",
+                "Triage queue efficiency has improved, reducing pending cases."
+            ],
+            areasForReview: [
+                "Investigate the root cause for the 12% increase in 'Lung Nodules' findings.",
+                "Address the two offline X-Ray machines to improve overall uptime further.",
+                "Review patient journey bottlenecks, as 78 patients are awaiting billing."
+            ]
+        },
+        keyMetrics: {
+            totalScreened: popData.metrics.totalScreened,
+            totalScreenedChange: 5.2,
+            revenue: adminData.financials.revenueThisMonth,
+            revenueChange: 4.8,
+            pendingCases: triageData.pendingCases,
+            pendingCasesChange: -3.1,
+            overallUptime: opsData.metrics.overallUptime,
+            overallUptimeChange: 0.1,
+        },
+        population: {
+            demographics: popData.demographics.slice(0, 5),
+            prevalence: popData.prevalence,
+        },
+        clinical: {
+            casesByFinding: clinData.caseAnalytics.casesByFinding,
+            concordanceRate: clinData.caseAnalytics.concordanceRate,
+        },
+        operations: {
+            equipment: opsData.equipment,
+            throughput: opsData.throughput,
+        },
+        financials: {
+            revenueTrends: adminData.revenueTrends,
+        }
+    };
+};
+
+export const fetchReportData = (): Promise<ReportData> => {
+    console.log('Fetching aggregated report data...');
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(generateMockReportData());
+        }, 1400);
+    });
+};

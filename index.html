@@ -7,7 +7,7 @@
     <title>Radiology Screening Analytics</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -15,6 +15,7 @@
           extend: {
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
+              serif: ['Roboto Slab', 'serif'],
             },
             colors: {
               'brand-teal': {
@@ -58,6 +59,35 @@
         }
       }
     </script>
+    <style>
+      @media print {
+        body, html {
+          background-color: white;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        header, #report-actions {
+          display: none !important;
+        }
+        main {
+          padding: 0 !important;
+          margin: 0 !important;
+          max-width: 100% !important;
+        }
+        #report-content {
+          box-shadow: none !important;
+          border: none !important;
+          border-radius: 0 !important;
+          margin: 0 !important;
+          padding: 1rem !important;
+        }
+        .chart-card-print {
+           box-shadow: none !important;
+           border: 1px solid #e2e8f0 !important;
+           page-break-inside: avoid;
+        }
+      }
+    </style>
   <script type="importmap">
 {
   "imports": {
