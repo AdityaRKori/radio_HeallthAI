@@ -1,0 +1,5 @@
+{
+  "name": "Radiology Screening Analytics Platform",
+  "description": "An AI-driven platform for clinical and operational analytics in large-scale radiology screening programs. It provides real-time insights, operational dashboards, and population health analytics.",
+  "requestFramePermissions": []
+}
