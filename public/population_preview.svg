@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="0" dy="2" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.1"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="offsetblur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="#f8fafc"/>
+  
+  <!-- Navbar -->
+  <rect width="800" height="50" fill="#ffffff" stroke="#e2e8f0"/>
+  <rect x="20" y="15" width="30" height="20" rx="4" fill="#ccfbf1"/>
+  <text x="60" y="30" font-family="Arial" font-size="14" font-weight="bold" fill="#1e293b">Qure-OS</text>
+  
+  <!-- Title & Filters -->
+  <text x="30" y="90" font-family="Arial" font-size="20" font-weight="bold" fill="#1e293b">Population Health Overview</text>
+  <rect x="550" y="70" width="220" height="30" rx="4" fill="#f1f5f9"/>
+
+  <!-- Metrics Row -->
+  <g transform="translate(30, 120)">
+    <!-- Metric 1 -->
+    <rect width="230" height="80" rx="8" fill="white" filter="url(#shadow)"/>
+    <text x="15" y="25" font-family="Arial" font-size="10" fill="#64748b">TOTAL SCREENED</text>
+    <text x="15" y="55" font-family="Arial" font-size="24" font-weight="bold" fill="#1e293b">128,430</text>
+    <text x="180" y="55" font-family="Arial" font-size="12" font-weight="bold" fill="#16a34a">+5.2%</text>
+
+    <!-- Metric 2 -->
+    <rect x="250" width="230" height="80" rx="8" fill="white" filter="url(#shadow)"/>
+    <text x="265" y="25" font-family="Arial" font-size="10" fill="#64748b">ABNORMALITIES</text>
+    <text x="265" y="55" font-family="Arial" font-size="24" font-weight="bold" fill="#1e293b">8,790</text>
+    
+    <!-- Metric 3 -->
+    <rect x="500" width="230" height="80" rx="8" fill="white" filter="url(#shadow)"/>
+    <text x="515" y="25" font-family="Arial" font-size="10" fill="#64748b">POSITIVITY RATE</text>
+    <text x="515" y="55" font-family="Arial" font-size="24" font-weight="bold" fill="#1e293b">7.01%</text>
+    <rect x="680" y="40" width="40" height="20" rx="10" fill="#ccfbf1"/>
+  </g>
+
+  <!-- Charts Row -->
+  <g transform="translate(30, 220)">
+    <!-- Large Chart (Map placeholder) -->
+    <rect width="480" height="250" rx="8" fill="white" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="480" height="40" rx="8" fill="white" stroke-bottom="#f1f5f9"/>
+    <text x="15" y="25" font-family="Arial" font-size="12" font-weight="bold" fill="#334155">Screening Sites Overview</text>
+    <!-- Fake Map Dots -->
+    <circle cx="200" cy="150" r="15" fill="#e2e8f0"/>
+    <circle cx="240" cy="120" r="8" fill="#0d9488"/>
+    <circle cx="150" cy="180" r="12" fill="#99f6e4"/>
+    <circle cx="300" cy="160" r="20" fill="#0d9488" opacity="0.6"/>
+    <path d="M100 200 Q 250 100 400 220" stroke="#cbd5e1" stroke-width="2" fill="none"/>
+
+    <!-- Small Chart (Pie) -->
+    <rect x="500" width="230" height="250" rx="8" fill="white" filter="url(#shadow)"/>
+    <text x="515" y="25" font-family="Arial" font-size="12" font-weight="bold" fill="#334155">Prevalence</text>
+    <!-- Pie Chart -->
+    <circle cx="615" cy="145" r="70" fill="#3b82f6"/>
+    <path d="M615 145 L 615 75 A 70 70 0 0 1 675 110 Z" fill="#14b8a6"/>
+    <path d="M615 145 L 675 110 A 70 70 0 0 1 650 205 Z" fill="#f59e0b"/>
+  </g>
+</svg>

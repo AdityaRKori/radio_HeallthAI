@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="0" dy="2" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.1"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="offsetblur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="#f8fafc"/>
+  
+  <!-- Navbar -->
+  <rect width="800" height="50" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="60" y="30" font-family="Arial" font-size="14" font-weight="bold" fill="#1e293b">Qure-OS</text>
+
+  <!-- Title -->
+  <text x="30" y="90" font-family="Arial" font-size="20" font-weight="bold" fill="#1e293b">Operations Command Center</text>
+
+  <!-- Metrics Row -->
+  <g transform="translate(30, 110)">
+    <rect width="230" height="70" rx="8" fill="white" filter="url(#shadow)"/>
+    <text x="15" y="25" font-family="Arial" font-size="10" fill="#64748b">EQUIPMENT UPTIME</text>
+    <text x="15" y="50" font-family="Arial" font-size="20" font-weight="bold" fill="#1e293b">99.4%</text>
+
+    <rect x="250" width="230" height="70" rx="8" fill="white" filter="url(#shadow)"/>
+    <text x="265" y="25" font-family="Arial" font-size="10" fill="#64748b">STAFF ON DUTY</text>
+    <text x="265" y="50" font-family="Arial" font-size="20" font-weight="bold" fill="#1e293b">23 / 25</text>
+    
+    <rect x="500" width="230" height="70" rx="8" fill="white" filter="url(#shadow)"/>
+    <text x="515" y="25" font-family="Arial" font-size="10" fill="#64748b">AVG WAIT TIME</text>
+    <text x="515" y="50" font-family="Arial" font-size="20" font-weight="bold" fill="#1e293b">22 min</text>
+  </g>
+
+  <!-- Triage Queue Table -->
+  <g transform="translate(30, 200)">
+    <rect width="730" height="260" rx="8" fill="white" filter="url(#shadow)"/>
+    <text x="20" y="30" font-family="Arial" font-size="14" font-weight="bold" fill="#334155">Smart Triage Queue</text>
+    <line x1="0" y1="50" x2="730" y2="50" stroke="#f1f5f9"/>
+
+    <!-- Header -->
+    <text x="20" y="70" font-family="Arial" font-size="10" font-weight="bold" fill="#94a3b8">PRIORITY</text>
+    <text x="100" y="70" font-family="Arial" font-size="10" font-weight="bold" fill="#94a3b8">PATIENT</text>
+    <text x="300" y="70" font-family="Arial" font-size="10" font-weight="bold" fill="#94a3b8">STATUS</text>
+    <text x="500" y="70" font-family="Arial" font-size="10" font-weight="bold" fill="#94a3b8">TAT</text>
+
+    <!-- Row 1 -->
+    <rect x="20" y="85" width="40" height="20" rx="4" fill="#ef4444"/>
+    <text x="30" y="99" font-family="Arial" font-size="11" font-weight="bold" fill="white">P1</text>
+    <text x="100" y="99" font-family="Arial" font-size="12" fill="#1e293b">John Doe (45)</text>
+    <rect x="300" y="85" width="80" height="20" rx="10" fill="#e2e8f0"/>
+    <text x="315" y="99" font-family="Arial" font-size="11" fill="#475569">Pending</text>
+    <text x="500" y="99" font-family="Arial" font-size="12" fill="#64748b">15m</text>
+    <line x1="0" y1="120" x2="730" y2="120" stroke="#f1f5f9"/>
+
+    <!-- Row 2 -->
+    <rect x="20" y="135" width="40" height="20" rx="4" fill="#f97316"/>
+    <text x="30" y="149" font-family="Arial" font-size="11" font-weight="bold" fill="white">P2</text>
+    <text x="100" y="149" font-family="Arial" font-size="12" fill="#1e293b">Jane Smith (32)</text>
+    <rect x="300" y="135" width="80" height="20" rx="10" fill="#dbeafe"/>
+    <text x="310" y="149" font-family="Arial" font-size="11" fill="#1e40af">In Progress</text>
+    <text x="500" y="149" font-family="Arial" font-size="12" fill="#64748b">45m</text>
+    <line x1="0" y1="170" x2="730" y2="170" stroke="#f1f5f9"/>
+
+     <!-- Row 3 -->
+    <rect x="20" y="185" width="40" height="20" rx="4" fill="#facc15"/>
+    <text x="30" y="199" font-family="Arial" font-size="11" font-weight="bold" fill="#854d0e">P3</text>
+    <text x="100" y="199" font-family="Arial" font-size="12" fill="#1e293b">Bob Brown (60)</text>
+    <rect x="300" y="185" width="80" height="20" rx="10" fill="#d1fae5"/>
+    <text x="310" y="199" font-family="Arial" font-size="11" fill="#065f46">Completed</text>
+    <text x="500" y="199" font-family="Arial" font-size="12" fill="#64748b">1h 20m</text>
+  </g>
+</svg>
