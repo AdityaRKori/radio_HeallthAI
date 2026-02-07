@@ -25,7 +25,8 @@
 2.  [The Problem](#-the-problem)
 3.  [The Solution: Qure-OS](#-the-solution-qure-os)
 4.  [Feature Deep Dive](#-feature-deep-dive)
-5.  [System Architecture](#-system-architecture)
+5.  [Technical Workflows](#-technical-workflows)
+6.  [System Architecture](#-system-architecture)
 
 ---
 
@@ -68,6 +69,76 @@ Qure-OS integrates **Clinical AI** (detection) with **Operational Intelligence**
 | **Population Health** | <img src="public/population_preview.svg" width="400" alt="Population Dashboard"> | **The "General's View"**<br>Aggregates data across all screening sites to visualize disease hotspots and demographic trends.<br>• **Metrics:** Total Screened, Positivity Rate.<br>• **Visuals:** Maps, Age Pyramids, Trends. |
 | **Clinical AI** | <img src="public/clinical_preview.svg" width="400" alt="Clinical AI Dashboard"> | **The "Radiologist's Co-pilot"**<br>Uses deep learning to assist clinicians.<br>• **Smart Triage:** Sorts by Urgency.<br>• **Visual Grounding:** Bounding boxes.<br>• **Confidence Scores:** "92% TB Probability". |
 | **Operations Center** | <img src="public/operations_preview.svg" width="400" alt="Operations Dashboard"> | **The "Control Tower"**<br>Ensures the machinery of healthcare keeps running.<br>• **Telemetry:** Scanner Online/Offline status.<br>• **Throughput:** Patients/Hour monitoring.<br>• **Resource Allocation:** Staff management. |
+
+---
+
+## ⚙️ Technical Workflows
+
+### 1. Population Health Aggregation
+How the system turns raw screening data into actionable epidemiological insights.
+
+```mermaid
+graph LR
+    A[Raw Screening Data] -->|Ingest| B{Aggregation Engine}
+    B -->|Filter| C[Positivity Heatmaps]
+    B -->|Group By| D[Demographic Splits]
+    B -->|Rank| E[Site Performance]
+    
+    style C fill:#ccfbf1,stroke:#0d9488,stroke-width:2px
+    style D fill:#dbeafe,stroke:#3b82f6,stroke-width:2px
+    style E fill:#fef3c7,stroke:#d97706,stroke-width:2px
+```
+
+### 2. Clinical Decision Support (CDSS) Flow
+The interaction loop between the Radiologist and the AI Assistant.
+
+```mermaid
+sequenceDiagram
+    participant Radiologist
+    participant CDSS_Interface
+    participant AI_Model
+    participant Patient_DB
+    
+    Radiologist->>CDSS_Interface: Select Next Patient
+    CDSS_Interface->>Patient_DB: Fetch DICOM & History
+    CDSS_Interface->>AI_Model: Request Real-time Inference
+    AI_Model-->>CDSS_Interface: Return Mask & Probability (92%)
+    CDSS_Interface-->>Radiologist: Render Heatmap Overlay
+    Radiologist->>CDSS_Interface: "Confirm Diagnosis"
+    CDSS_Interface->>Patient_DB: Update Record & Trigger Alert
+```
+
+### 3. Smart Triage Logic
+The "Brain" that decides who gets treated first, replacing standard FIFO queues with AI-driven prioritization.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Incoming_Scan
+    Incoming_Scan --> AI_Analysis
+    
+    state AI_Analysis {
+        [*] --> Check_TB
+        Check_TB --> Check_Nodules
+        Check_Nodules --> Check_Pneumonia
+    }
+    
+    AI_Analysis --> Score_Calculation
+    Score_Calculation --> Priority_Assignment
+    
+    state Priority_Assignment {
+        state "High Confidence (>85%)" as High
+        state "Medium Confidence (>50%)" as Med
+        state "Low Confidence (<50%)" as Low
+        
+        High --> P1_Critical: Flag Red
+        Med --> P2_Urgent: Flag Orange
+        Low --> P3_Routine: Standard Queue
+    }
+    
+    P1_Critical --> Radiologist_Worklist: Top of List
+    P2_Urgent --> Radiologist_Worklist: Middle of List
+    P3_Routine --> Radiologist_Worklist: Bottom of List
+```
 
 ---
 
